@@ -580,9 +580,6 @@ struct nvram_pair router_defaults[] = {
 	{ "ss_cgoups_cpu_s", "512" },
 	{ "ss_cgoups_mem_s", "20M" },
 	{ "ss_watchcat", "0" },
-	{ "ss_turn", "0" },
-	{ "ss_turn_s", "600" },
-	{ "ss_turn_ss", "5" },
 	{ "socks5_enable", "nil" }, 	//nil 停用 same 与主服务相同
 	{ "socks5_port", "1088" },
 	{ "ss_adblock", "0" },
