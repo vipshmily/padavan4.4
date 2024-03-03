@@ -217,9 +217,9 @@ function showMRULESList() {
 								<div class="span12">
 									<div class="box well grad_colour_dark_blue">
 										<h2 class="box_head round_top">
-											<#menu5_30#>
+											<#menu5_32#>
 												-
-												<#menu5_32#>
+												<#menu5_30#>
 										</h2>
 										<div class="round_bottom">
 											<div>

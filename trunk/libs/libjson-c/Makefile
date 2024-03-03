@@ -13,7 +13,7 @@ download_test:
 extract_test:
 	( if [ ! -d $(SRC_NAME) ]; then \
 		tar zxf $(ARCHIVE_NAME).tar.gz; \
-		patch -p1 -d $(SRC_NAME) < json-c-0.17.patch; \
+	#	patch -p1 -d $(SRC_NAME) < json-c-0.17.patch; \
 	fi )
 
 config_test:
