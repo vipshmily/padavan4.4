@@ -44,6 +44,7 @@
 			init_itoggle('ss_update_chnroute');
 			init_itoggle('ss_update_gfwlist');
 			init_itoggle('ss_adblock');
+			init_itoggle('ss_adblock_url');
 			init_itoggle('socks5_enable');
 			init_itoggle('ss_schedule_enable', change_on);
 			$j("#tab_ss_cfg, #tab_ss_add, #tab_ss_dlink, #tab_ss_ssl, #tab_ss_cli, #tab_ss_log, #tab_ss_help").click(

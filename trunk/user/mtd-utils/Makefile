@@ -1,5 +1,5 @@
-SRC_NAME=mtd-utils-2.1.6
-SRC_URL = https://codeload.github.com/sigma-star/mtd-utils/tar.gz/refs/tags/v2.1.6
+SRC_NAME=mtd-utils-2.2.0
+SRC_URL = https://codeload.github.com/sigma-star/mtd-utils/tar.gz/refs/tags/v2.2.0
 
 THISDIR = $(shell pwd)
 

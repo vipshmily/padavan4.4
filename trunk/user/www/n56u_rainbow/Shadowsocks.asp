@@ -57,6 +57,7 @@
 			init_itoggle('ss_update_chnroute');
 			init_itoggle('ss_update_gfwlist');
 			init_itoggle('ss_adblock');
+			init_itoggle('ss_adblock_url');
 			init_itoggle('ss_turn');
 			init_itoggle('socks5_enable');
 			init_itoggle('ss_schedule_enable', change_on);
