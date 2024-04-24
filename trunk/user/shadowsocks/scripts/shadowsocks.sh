@@ -152,7 +152,8 @@ get_arg_out() {
 start_rules() {
     log "正在添加防火墙规则..."
 	lua /etc_ro/ss/getconfig.lua $GLOBAL_SERVER > /tmp/server.txt
-	server=`cat /tmp/server.txt` 
+	server=`cat /tmp/server.txt`
+	rm -f /tmp/server.txt 
 	cat /etc/storage/ss_ip.sh | grep -v '^!' | grep -v "^$" >$wan_fw_ips
 	cat /etc/storage/ss_wan_ip.sh | grep -v '^!' | grep -v "^$" >$wan_bp_ips
 	#resolve name
@@ -176,7 +177,8 @@ start_rules() {
 	if [ "$UDP_RELAY_SERVER" != "nil" ]; then
 		ARG_UDP="-U"
 		lua /etc_ro/ss/getconfig.lua $UDP_RELAY_SERVER > /tmp/userver.txt
-	    udp_server=`cat /tmp/userver.txt` 
+		udp_server=`cat /tmp/userver.txt`
+		rm -f /tmp/userver.txt 
 		udp_local_port="1080"
 	fi
 	if [ -n "$lan_ac_ips" ]; then
@@ -198,7 +200,7 @@ start_rules() {
 	if [ "$lan_con" = "0" ]; then
 		rm -f $lan_fp_ips
 		lancon="all"
-		lancons="全部IP走代理！"
+		lancons="全部IP走代理..."
 		cat /etc/storage/ss_lan_ip.sh | grep -v '^!' | grep -v "^$" >$lan_fp_ips
 	elif [ "$lan_con" = "1" ]; then
 		rm -f $lan_fp_ips
@@ -259,15 +261,15 @@ start_redir_tcp() {
 			run_bin $bin --config $trojan_json_file
 			usleep 500000
 		done
-		log "$($bin --version 2>&1 | head -1) 启动成功!"
+		log "$($bin --version 2>&1 | head -1) 启动成功！"
 		;;
 	v2ray)
 		run_bin $bin -config $v2_json_file
-		log "$($bin -version | head -1) 启动成功!"
+		log "$($bin -version | head -1) 启动成功！"
 		;;
 	xray)
 		run_bin $bin -config $v2_json_file
-		log "$($bin -version | head -1) 启动成功!"
+		log "$($bin -version | head -1) 启动成功！"
 		;;	
 	socks5)
 		for i in $(seq 1 $threads); do
@@ -577,7 +579,7 @@ clear_iptable() {
 kill_process() {
 	v2ray_process=$(pidof v2ray || pidof xray)
 	if [ -n "$v2ray_process" ]; then
-		log "关闭 xray 进程..."
+		log "关闭 Xray 进程..."
 		killall v2ray xray >/dev/null 2>&1
 		kill -9 "$v2ray_process" >/dev/null 2>&1
 	fi
@@ -669,15 +671,15 @@ ressp() {
 	start_watchcat
 	auto_update
 	ENABLE_SERVER=$(nvram get global_server)
-	log "备用服务器启动成功"
+	log "备用服务器启动成功！"
 	log "内网IP控制为: $lancons"
 }
 
 case $1 in
 start)
     ss_adblock=$(nvram get ss_adblock)
-        if [ $(nvram get ss_adblock) = "1" ]; then
-            Start_AD
+    if [ $(nvram get ss_adblock) = "1" ]; then
+        Start_AD
     fi
 	ssp_start
 	;;

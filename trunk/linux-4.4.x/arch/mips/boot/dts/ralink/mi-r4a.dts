@@ -23,7 +23,7 @@
 		};
 
 		stat_b {
-			label = "power";
+			label = "blue";
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 	};

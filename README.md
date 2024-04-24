@@ -2,13 +2,24 @@
 
 This project is based on original rt-n56u with latest mtk 4.4.198 kernel, which is fetch from D-LINK GPL code.
 
+#### Extra functions / changes
+- Adding user/chinadns-ng , and fix shadowsocks + chinadns-ng using local domain whitellist.
+- AP relay auto-daemon
+
+
+#### SS/SSR
+- Transparent proxy (iptables) wasn't cleaned completely, this issue is fixed.
+- Adding DNSProxy , Local DNS integrated with SS/SSR 
+- Dnsmasq optimization specially for SS/SSR 
+- Resolve DNS pollution - Adding DNS i/p in china-route mode
+- Fast-open option is enabled according to linux version
 ##### Enhancements in this repo
 
 - commits has beed rewritten on top of [hanwckf/rt-n56u](https://github.com/hanwckf/rt-n56u) repo for better history tracking
 - Optimized Makefiles and build scripts, added a toplevel Makefile
 - Added ccache support, may save up to 50%+ build time
 - Upgraded the toolchain and libc:
-  - gcc 10.3.0
+  - gcc 10.5.0
   - uClibc-ng 1.0.42
  - Enabled kernel cgroups support
  - Fixed K2P led label names
@@ -50,18 +61,20 @@ This project is based on original rt-n56u with latest mtk 4.4.198 kernel, which 
 - XY-C1
 - GHL(from https://github.com/fangenhui520/padavan-4.4, 没有机器测试，自行判断)
 - EA7500(from https://github.com/MNM28/padavan-4.4, 没有机器测试，自行判断)
-- R6800(from https://github.com/MNM28/padavan-4.4, 没有机器测试，自行判断)
+- NETGEAR-R6800(from https://github.com/MNM28/padavan-4.4, 没有机器测试，自行判断)
 - TX1801 Plus(from https://github.com/MNM28/padavan-4.4, 没有机器测试，自行判断)
 - JDCloud RE-CP-02(无线宝鲁班, from https://github.com/240038901/padavan-4.4, 没有机器测试，自行判断)
 - JDCloud RE-SP-01B(from https://github.com/MeIsReallyBa/padavan-4.4, 没有机器测试，自行判断)
 - NEWIFI3(from https://github.com/GH-X/padavan-4.4, 必须拆除主板上编号为C48的电容(位于CPU旁边), 否则外网(WAN)将不能正常工作)
-- MI-R4A(from https://github.com/vipshmily/padavan-4.4, 没有机器测试，自行判断)
+- MI-R4A(from https://github.com/vipshmily/padavan-4.4, 自测可用)
 - QM-B1(from https://github.com/monw/padavan, 没有机器测试，自行判断)
 - WE410443-TC(from https://github.com/akw28888/padavan-4.4, 没有机器测试，自行判断)
 - HAR-20S2U1(from https://github.com/vb1980/padavan-4.4, 没有机器测试，自行判断)
-- SIM-AX1800T(from https://github.com/vb1980/padavan-4.4, 自测可用)
+- SIM-AX1800T(from https://github.com/vb1980/padavan-4.4, 没有机器测试，自行判断)
 - G-AX1800(富春江G-AX1800, from https://github.com/ddyjyj/padavan-4.4, 没有机器测试，自行判断)
-- WIA3300-10(西加云杉WIA3300-10，据说和K2P配置差不多，机器买了没到，先适配起来)
+- WIA3300-10(西加云杉WIA3300-10，from https://github.com/vb1980/padavan-4.4, 没有机器测试，自行判断)
+- JCQ-Q11Pro(from https://github.com/qewwqewq22/padavan11, 没有机器测试，自行判断)
+- NETGEAR-R7450(from https://github.com/vipshmily/padavan-4.4, 自测可用)
 # Compilation steps
 
 - Install dependencies
@@ -75,7 +88,7 @@ This project is based on original rt-n56u with latest mtk 4.4.198 kernel, which 
   **Optional:** install [golang](https://go.dev/doc/install) (and add it to PATH), if you are going to build go programs
 - Clone source code
   ```sh
-  git clone https://github.com/tsl0922/padavan.git
+  git clone https://github.com/vipshmily/padavan-4.4.git
   ```
 - Modify template file and start compiling
   ```sh
