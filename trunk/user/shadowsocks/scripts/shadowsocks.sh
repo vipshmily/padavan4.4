@@ -34,6 +34,8 @@ run_mode=`nvram get ss_run_mode`
 lan_con=`nvram get lan_con`
 GLOBAL_SERVER=`nvram get global_server`
 socks=""
+SS_RULES=/usr/bin/ss-rules
+[ -x /etc/storage/ss-rules ] && SS_RULES=/etc/storage/ss-rules
 
 log() {
 	logger -t "$NAME" "$@"
@@ -153,7 +155,7 @@ start_rules() {
     log "正在添加防火墙规则..."
 	lua /etc_ro/ss/getconfig.lua $GLOBAL_SERVER > /tmp/server.txt
 	server=`cat /tmp/server.txt`
-	rm -f /tmp/server.txt 
+	rm -f /tmp/server.txt
 	cat /etc/storage/ss_ip.sh | grep -v '^!' | grep -v "^$" >$wan_fw_ips
 	cat /etc/storage/ss_wan_ip.sh | grep -v '^!' | grep -v "^$" >$wan_bp_ips
 	#resolve name
@@ -178,7 +180,7 @@ start_rules() {
 		ARG_UDP="-U"
 		lua /etc_ro/ss/getconfig.lua $UDP_RELAY_SERVER > /tmp/userver.txt
 		udp_server=`cat /tmp/userver.txt`
-		rm -f /tmp/userver.txt 
+		rm -f /tmp/userver.txt
 		udp_local_port="1080"
 	fi
 	if [ -n "$lan_ac_ips" ]; then
@@ -216,7 +218,7 @@ start_rules() {
 	else
 		proxyport="-m multiport --dports 22,53,587,465,995,993,143,80,443,3389 --syn"
 	fi
-	/usr/bin/ss-rules \
+	$SS_RULES \
 		-s "$server" \
 		-l "$local_port" \
 		-S "$udp_server" \
@@ -244,7 +246,7 @@ start_redir_tcp() {
 	else
 		threads=$(nvram get ss_threads)
 	fi
-	log "正在启动 $stype 主服务器..."
+	log "正在启动 $stype 服务器..."
 	case "$stype" in
 	ss | ssr)
 		last_config_file=$CONFIG_FILE
@@ -549,7 +551,7 @@ ssp_start() {
 
 ssp_close() {
 	rm -rf /tmp/cdn
-	/usr/bin/ss-rules -f
+	$SS_RULES -f
 	kill -9 $(ps | grep ss-monitor | grep -v grep | awk '{print $1}') >/dev/null 2>&1
 	kill_process
 	cgroups_cleanup

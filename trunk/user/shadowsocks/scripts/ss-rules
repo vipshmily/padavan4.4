@@ -76,6 +76,7 @@ flush_r() {
 	ipset -X china 2>/dev/null
 	ipset -X fplan 2>/dev/null
 	ipset -X gmlan 2>/dev/null
+	ipset -X gfwlist 2>/dev/null
 	ipset -X oversea 2>/dev/null
 	ipset -X blacklist 2>/dev/null
 	ipset -X whitelist 2>/dev/null
@@ -87,6 +88,7 @@ ipset_r() {
     mkdir -p /tmp/dnsmasq.dom
 	ipset -N china hash:net 2>/dev/null
 	ipset -N gmlan hash:net 2>/dev/null
+	ipset -N gfwlist hash:net 2>/dev/null
 	for ip in $LAN_GM_IP; do ipset -! add gmlan $ip; done
 	$ipt_n -N SS_SPEC_WAN_AC
 	$ipt_n -I SS_SPEC_WAN_AC -p tcp ! --dport 53 -d $server -j RETURN

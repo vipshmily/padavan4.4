@@ -49,7 +49,6 @@
 
 #ifdef CONFIG_FAST_NAT_SUPPORT
 #include <net/nat/hw_nat/ra_nat.h>
-#include <net/nat/hw_nat/frame_engine.h>
 #endif /*CONFIG_FAST_NAT_SUPPORT*/
 
 #ifdef VLAN_SUPPORT

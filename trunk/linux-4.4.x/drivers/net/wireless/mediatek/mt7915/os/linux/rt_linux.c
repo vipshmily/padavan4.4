@@ -49,7 +49,7 @@
 #endif /* MEM_ALLOC_INFO_SUPPORT */
 
 #ifdef CONFIG_FAST_NAT_SUPPORT
-#include <net/ra_nat.h>
+#include <net/nat/hw_nat/ra_nat.h>
 #endif /*CONFIG_FAST_NAT_SUPPORT*/
 #include "multi_hif.h"
 
